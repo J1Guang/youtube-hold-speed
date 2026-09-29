@@ -6,13 +6,15 @@
 
 [下载扩展安装包](https://github.com/J1Guang/youtube-hold-speed/releases/latest) · [自动测试](https://github.com/J1Guang/youtube-hold-speed/actions) · [验证记录](docs/VALIDATION.md)
 
+**商店进度（2026-09-30）**：v1.1.0 已提交 Chrome 应用商店审核，当前为「待审核」，已选择审核通过后自动公开发布。扩展 ID 为 `hhooohnajochajnlmhembkjhpkkcdbmg`。审核期间可使用下方的本地安装方式；提交记录见 [商店材料说明](store/SUBMISSION.md)。
+
 ## 使用体验
 
 | 操作 | 效果 |
 | --- | --- |
 | 播放时长按 `→`，约 300 毫秒 | 临时以所选速度播放，默认 **3×**，显示速度提示 |
 | 松开 `→` | 恢复长按前的速度，包括 0.5×、1.5×、2× 等 |
-| 短按 `→` | 松开时交还 YouTube，触发原来的快进（通常为 5 秒） |
+| 播放时短按 `→` | 松开时交还 YouTube，触发原来的快进（通常为 5 秒） |
 | 暂停时按下 `→` | 立即按所选倍速临时播放；松开恢复暂停，不跳过 5 秒 |
 | 点击工具栏的扩展图标 | 选择 **2× / 3× / 4×**，保存后下次按住生效 |
 | `←`、`↑`、`↓` | 保留 YouTube 原有后退和音量操作 |
@@ -35,7 +37,7 @@
 
 如果使用的是打包后的 `youtube-hold-speed-v1.1.0.zip`，解压后直接选择含 `manifest.json` 的那层目录。安装后请保留该目录，不要删除或移动。
 
-更新代码后，在扩展管理页面点击重新加载，然后刷新 YouTube 标签页。以上流程依据 [Chrome 官方本地安装说明](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)。本项目尚未上架 Chrome 应用商店。
+更新代码后，在扩展管理页面点击重新加载，然后刷新 YouTube 标签页。以上流程依据 [Chrome 官方本地安装说明](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)。Chrome 应用商店版本已提交审核，尚未公开上架。
 
 ```sh
 git clone https://github.com/J1Guang/youtube-hold-speed.git

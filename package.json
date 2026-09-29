@@ -1,0 +1,24 @@
+{
+  "name": "youtube-hold-speed",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bilibili-style hold ArrowRight for 3x playback on YouTube.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/J1Guang/youtube-hold-speed.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node --check extension/content.js",
+    "test": "playwright test",
+    "package": "node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "fflate": "0.8.3"
+  }
+}

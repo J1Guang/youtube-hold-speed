@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Hold Speed integration fixture</title></head>
+<body style="background:#20212a;color:white;font:16px system-ui">
+  <h1>YouTube keyboard contract fixture</h1>
+  <div id="movie_player" class="html5-video-player" tabindex="0"
+    style="position:relative;width:640px;height:360px;background:#090b10">
+    <video class="html5-main-video" muted loop
+      style="width:640px;height:360px"></video>
+    <div class="ytp-progress-bar" role="slider" tabindex="0">Progress</div>
+    <button class="ytp-button">Player button</button>
+    <div class="ytp-settings-menu" hidden><button id="setting">Speed</button></div>
+    <div class="volume" role="slider" tabindex="0">Volume</div>
+  </div>
+  <input id="search" value="abcdef" aria-label="Search">
+  <textarea id="comment">Comment</textarea>
+  <div id="editor" contenteditable="true">Editable comment</div>
+  <button id="outside">Outside button</button>
+  <div id="shadow-host"></div>
+  <script>
+    const video = document.querySelector('video');
+    const player = document.querySelector('#movie_player');
+    window.nativeEvents = [];
+    window.nativeSeekCount = 0;
+    const shadow = document.querySelector('#shadow-host').attachShadow({mode:'open'});
+    shadow.innerHTML = '<input id="shadow-input" value="abcdef">';
+    window.addEventListener('keydown', (event) => {
+      window.nativeEvents.push({type:'keydown', key:event.key, repeat:event.repeat,
+        trusted:event.isTrusted, keyCode:event.keyCode});
+      if (event.defaultPrevented || event.altKey || event.ctrlKey || event.shiftKey || event.metaKey) return;
+      if (event.composedPath().some(el => el instanceof Element &&
+        (el.isContentEditable || el.matches('input,textarea,button,.volume,.ytp-settings-menu')))) return;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+        window.nativeSeekCount++;
+        video.currentTime = Math.max(0, Math.min(video.duration - 0.01,
+          video.currentTime + (event.key === 'ArrowRight' ? 5 : -5)));
+        event.preventDefault();
+      }
+      if (event.key === 'ArrowUp') video.volume = Math.min(1, video.volume + 0.05);
+      if (event.key === 'ArrowDown') video.volume = Math.max(0, video.volume - 0.05);
+    });
+    window.addEventListener('keyup', (event) => {
+      window.nativeEvents.push({type:'keyup',key:event.key,trusted:event.isTrusted});
+    });
+    video.volume = 0.5;
+    window.ready = (async () => {
+      const response = await fetch('/tone.wav');
+      video.src = URL.createObjectURL(await response.blob());
+      await video.play();
+      await new Promise(resolve => {
+        video.addEventListener('seeked', resolve, {once:true});
+        video.currentTime = 10;
+      });
+      player.focus();
+    })();
+  </script>
+</body>
+</html>

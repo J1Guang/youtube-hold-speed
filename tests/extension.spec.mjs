@@ -17,24 +17,21 @@ const test = base.extend({
   extensionContext: [async ({}, use) => {
     const installedChrome = process.env.CHROME_EXECUTABLE;
     const context = await chromium.launchPersistentContext("", {
-      ...(installedChrome ? { executablePath: installedChrome,
-        ignoreDefaultArgs: ["--disable-extensions"] } : { channel: "chromium" }),
+      ...(installedChrome ? { executablePath: installedChrome } : { channel: "chromium" }),
+      ignoreDefaultArgs: ["--disable-extensions"],
       headless: true,
       args: [
-        ...(installedChrome ? ["--enable-unsafe-extension-debugging"] : [
-          `--disable-extensions-except=${extensionPath}`,
-          `--load-extension=${extensionPath}`,
-        ]),
+        "--enable-unsafe-extension-debugging",
         "--autoplay-policy=no-user-gesture-required",
       ],
     });
-    if (installedChrome) {
-      const cdp = await context.browser().newBrowserCDPSession();
-      await cdp.send("Extensions.loadUnpacked", { path: extensionPath });
-      await cdp.detach();
-    }
+    const cdp = await context.browser().newBrowserCDPSession();
+    const { id } = await cdp.send("Extensions.loadUnpacked", { path: extensionPath });
+    context.holdSpeedId = id;
+    await cdp.detach();
     await context.route("**/*", async (route) => {
       const url = new URL(route.request().url());
+      if (url.protocol === "chrome-extension:") return route.continue();
       if (url.pathname === "/tone.wav") {
         await route.fulfill({ contentType: "audio/wav", body: audio });
       } else {
@@ -45,6 +42,10 @@ const test = base.extend({
     await context.close();
   }, { scope: "worker" }],
   page: async ({ extensionContext }, use) => {
+    const settings = await extensionContext.newPage();
+    await settings.goto(`chrome-extension://${extensionContext.holdSpeedId}/popup.html`);
+    await settings.evaluate(() => chrome.storage.local.clear());
+    await settings.close();
     const page = await extensionContext.newPage();
     await page.goto("https://www.youtube.com/watch?v=local-contract-fixture");
     await page.evaluate(() => window.ready);
@@ -55,10 +56,28 @@ const test = base.extend({
 
 const rate = (page) => page.locator("video").evaluate(v => v.playbackRate);
 const seeks = (page) => page.evaluate(() => window.nativeSeekCount);
-async function hold(page) {
+async function hold(page, speed = 3) {
   await page.keyboard.down("ArrowRight");
   await expect(page.locator("[data-yths-indicator]")).toBeAttached();
-  await expect.poll(() => rate(page)).toBe(3);
+  await expect.poll(() => rate(page)).toBe(speed);
+}
+
+async function openPopup(context) {
+  const popup = await context.newPage();
+  await popup.goto(`chrome-extension://${context.holdSpeedId}/popup.html`);
+  await expect(popup.locator("#speed-options")).toBeEnabled();
+  return popup;
+}
+
+async function chooseSpeed(context, page, speed) {
+  const popup = await openPopup(context);
+  await popup.locator(`label:has(input[value="${speed}"])`).click();
+  await expect(popup.locator(`input[value="${speed}"]`)).toBeChecked();
+  await expect(popup.locator("#speed-options")).toBeEnabled();
+  expect(await popup.evaluate(() => chrome.storage.local.get({boostRate:3}))).toEqual({boostRate:speed});
+  await popup.close();
+  await page.bringToFront();
+  await page.locator("#movie_player").focus();
 }
 
 test("a tap replays one native seek and a matching keyup", async ({ page }) => {
@@ -165,15 +184,121 @@ for (const modifier of ["Control", "Alt", "Meta", "Shift"]) {
   });
 }
 
-test("paused video retains native tap and repeat behavior", async ({ page }) => {
+test("paused video plays immediately while held and returns to pause on release", async ({ page }) => {
   await page.locator("video").evaluate(v => v.pause());
+  const before = await page.locator("video").evaluate(v => v.currentTime);
   await page.keyboard.down("ArrowRight");
+  expect(await rate(page)).toBe(3);
+  expect(await page.locator("video").evaluate(v => v.paused)).toBe(false);
   await page.keyboard.down("ArrowRight");
   await page.waitForTimeout(380);
   await page.keyboard.up("ArrowRight");
-  expect(await seeks(page)).toBe(2);
+  expect(await seeks(page)).toBe(0);
   expect(await rate(page)).toBe(1);
   expect(await page.locator("video").evaluate(v => v.paused)).toBe(true);
+  const after = await page.locator("video").evaluate(v => v.currentTime);
+  expect(after).toBeGreaterThan(before);
+  expect(after).toBeLessThan(before + 4);
+});
+
+test("a quick tap on paused video never seeks or leaves playback running", async ({ page }) => {
+  await page.locator("video").evaluate(v => { v.pause(); v.playbackRate = 1.5; });
+  for (let i = 0; i < 3; i++) await page.keyboard.press("ArrowRight");
+  await page.waitForTimeout(150);
+  expect(await seeks(page)).toBe(0);
+  expect(await rate(page)).toBe(1.5);
+  expect(await page.locator("video").evaluate(v => v.paused)).toBe(true);
+  await expect(page.locator("[data-yths-indicator]")).not.toBeAttached();
+});
+
+for (const kind of ["blur", "navigate", "focus", "pause"]) {
+  test(`paused-origin hold restores pause on ${kind}`, async ({ page }) => {
+    await page.locator("video").evaluate(v => { v.pause(); v.playbackRate = 0.5; });
+    await hold(page);
+    await page.evaluate(kind => {
+      if (kind === "blur") window.dispatchEvent(new Event("blur"));
+      if (kind === "navigate") document.dispatchEvent(new Event("yt-navigate-start"));
+      if (kind === "focus") document.querySelector("#search").focus();
+      if (kind === "pause") document.querySelector("video").pause();
+    }, kind);
+    await expect.poll(() => rate(page)).toBe(0.5);
+    expect(await page.locator("video").evaluate(v => v.paused)).toBe(true);
+    await page.keyboard.up("ArrowRight");
+    expect(await seeks(page)).toBe(0);
+  });
+}
+
+for (const speed of [2, 3, 4]) {
+  for (const paused of [false, true]) {
+    test(`popup ${speed}x applies to ${paused ? "paused" : "playing"} video without a reload`, async ({ page, extensionContext }) => {
+      await chooseSpeed(extensionContext, page, speed);
+      await page.locator("video").evaluate((v, paused) => {
+        v.playbackRate = 1.5;
+        if (paused) v.pause();
+      }, paused);
+      await hold(page, speed);
+      await page.keyboard.up("ArrowRight");
+      expect(await rate(page)).toBe(1.5);
+      expect(await page.locator("video").evaluate(v => v.paused)).toBe(paused);
+      expect(await seeks(page)).toBe(0);
+    });
+  }
+}
+
+test("saved speed survives reopening the popup and reloading YouTube", async ({ page, extensionContext }) => {
+  await chooseSpeed(extensionContext, page, 4);
+  const popup = await openPopup(extensionContext);
+  await expect(popup.locator('input[value="4"]')).toBeChecked();
+  expect(await popup.evaluate(() => chrome.storage.local.get(null))).toEqual({boostRate:4});
+  await popup.close();
+  await page.reload();
+  await page.evaluate(() => window.ready);
+  await hold(page, 4);
+  await page.keyboard.up("ArrowRight");
+});
+
+test("invalid stored speed falls back to 3x", async ({ page, extensionContext }) => {
+  const popup = await openPopup(extensionContext);
+  await popup.evaluate(() => chrome.storage.local.set({boostRate:99}));
+  await popup.reload();
+  await expect(popup.locator('input[value="3"]')).toBeChecked();
+  await popup.close();
+  await page.bringToFront();
+  await page.locator("#movie_player").focus();
+  await hold(page);
+  await page.keyboard.up("ArrowRight");
+});
+
+test("popup radios are keyboard accessible", async ({ page, extensionContext }) => {
+  const popup = await openPopup(extensionContext);
+  await popup.locator('input[value="3"]').focus();
+  await popup.keyboard.press("ArrowRight");
+  await expect(popup.locator('input[value="4"]')).toBeChecked();
+  await expect(popup.locator("#save-status")).toContainText("已保存 4×");
+  await popup.close();
+});
+
+test("rejected play request restores rate and pause without an unhandled error", async ({ page, extensionContext }) => {
+  await page.locator("video").evaluate(v => v.pause());
+  const cdp = await extensionContext.newCDPSession(page);
+  const worlds = [];
+  cdp.on("Runtime.executionContextCreated", ({context}) => worlds.push(context));
+  await cdp.send("Runtime.enable");
+  const extensionWorld = worlds.find(world => world.origin.startsWith("chrome-extension://"));
+  await cdp.send("Runtime.evaluate", {
+    contextId: extensionWorld.id,
+    expression: "HTMLMediaElement.prototype.play = function() { return Promise.reject(new DOMException('Blocked', 'NotAllowedError')); };",
+  });
+  const errors = [];
+  page.on("pageerror", error => errors.push(error.message));
+  await page.keyboard.down("ArrowRight");
+  await expect.poll(() => rate(page)).toBe(1);
+  await page.keyboard.up("ArrowRight");
+  expect(await page.locator("video").evaluate(v => v.paused)).toBe(true);
+  expect(await seeks(page)).toBe(0);
+  await expect(page.locator("[data-yths-indicator]")).not.toBeAttached();
+  expect(errors).toEqual([]);
+  await cdp.detach();
 });
 
 for (const kind of ["blur", "pagehide", "navigate", "pause", "focus", "shadow-focus", "ad", "removed", "source"]) {

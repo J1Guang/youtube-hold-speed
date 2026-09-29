@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hold Speed · 长按倍速</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="popup.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="icons/icon48.png" width="42" height="42" alt="">
+    <div><strong>Hold Speed</strong><span>for YouTube</span></div>
+    <kbd aria-label="右方向键">→</kbd>
+  </header>
+  <main>
+    <p class="eyebrow">快一点，由你决定</p>
+    <h1>长按播放速度</h1>
+    <fieldset id="speed-options" disabled>
+      <legend class="sr-only">选择长按右方向键时的播放速度</legend>
+      <label><input type="radio" name="speed" value="2"><span>2<small>×</small></span></label>
+      <label><input type="radio" name="speed" value="3" checked><span>3<small>×</small></span></label>
+      <label><input type="radio" name="speed" value="4"><span>4<small>×</small></span></label>
+    </fieldset>
+    <p id="save-status" role="status" aria-live="polite">正在读取设置…</p>
+    <div class="instructions">
+      <div><span class="state-icon" aria-hidden="true">▶</span><p><b>播放中</b><span>短按快进，长按倍速；松开恢复原速。</span></p></div>
+      <div><span class="state-icon" aria-hidden="true">Ⅱ</span><p><b>暂停时</b><span>按住临时播放，松开继续暂停。</span></p></div>
+    </div>
+    <p class="privacy-note">设置仅保存在此浏览器，不上传数据。</p>
+  </main>
+  <footer>
+    <span>v1.1.0</span>
+    <nav aria-label="相关链接">
+      <a href="https://github.com/J1Guang/youtube-hold-speed" target="_blank" rel="noopener noreferrer">项目主页</a>
+      <a href="https://github.com/J1Guang/youtube-hold-speed/blob/main/PRIVACY.md" target="_blank" rel="noopener noreferrer">隐私说明</a>
+    </nav>
+  </footer>
+</body>
+</html>

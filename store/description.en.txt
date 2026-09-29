@@ -1,0 +1,27 @@
+Hold Speed for YouTube
+
+Hold the right arrow to speed up YouTube. Release to return to your previous playback state.
+
+CHOOSE 2×, 3× OR 4×
+Open the extension's toolbar popup and select your preferred hold speed. The default is 3×. Your choice stays in this browser and applies to the next hold without reloading YouTube.
+
+WHILE PLAYING
+A quick tap keeps YouTube's usual forward seek, triggered on release. Hold ArrowRight for about 300 milliseconds to use your selected speed, then release to restore the previous playback rate, including rates such as 1.5× or 2×.
+
+WHILE PAUSED
+Press ArrowRight to start temporary playback at your selected speed immediately. Release to pause again at the new position. A quick tap while paused uses this same behavior instead of seeking forward five seconds.
+
+FAMILIAR CONTROLS
+Left, up and down arrows, modified keyboard shortcuts, search and comment fields, and player menus retain their usual controls.
+
+LOCAL AND LIGHTWEIGHT
+No additional account, ads, analytics or uploaded browsing data. Only the speed preference is saved locally. Temporary acceleration ends when the page loses focus or the video changes.
+
+Designed for desktop Chrome on YouTube and matching embedded players. Ads and infinite-duration live streams are excluded. Temporary playback does not bypass browser or website playback restrictions. The settings interface is currently in Simplified Chinese; the speed choices use numeric labels.
+
+Refresh existing YouTube tabs after installing or updating. Pin the extension to the toolbar for quick access to speed settings.
+
+Independent third-party extension, not affiliated with YouTube, Google or Bilibili.
+
+Project and support: https://github.com/J1Guang/youtube-hold-speed
+Privacy policy: https://github.com/J1Guang/youtube-hold-speed/blob/main/PRIVACY.md

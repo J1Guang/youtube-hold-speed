@@ -1,8 +1,18 @@
 {
   "manifest_version": 3,
-  "name": "YouTube Hold Speed · 长按三倍速",
-  "version": "1.0.0",
-  "description": "像 Bilibili 一样长按右方向键，以 3 倍速播放 YouTube；松开恢复原速，短按仍然快进。",
+  "name": "Hold Speed for YouTube · 长按倍速",
+  "version": "1.1.0",
+  "description": "长按右方向键，以 2×、3× 或 4× 播放 YouTube；松开恢复原速。暂停时按住临时播放，松开继续暂停。",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Hold Speed · 设置长按倍速",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "homepage_url": "https://github.com/J1Guang/youtube-hold-speed",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",

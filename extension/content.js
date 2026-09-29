@@ -2,7 +2,7 @@
   "use strict";
 
   const HOLD_DELAY_MS = 300;
-  const BOOST_RATE = 3;
+  const ALLOWED_RATES = [2, 3, 4];
   const CONTROL_SELECTOR = [
     "input", "textarea", "select", "[role='textbox']",
     "[role='combobox']", "[role='listbox']", "[role='menu']",
@@ -14,6 +14,24 @@
   let press = null;
   let ownsRightKey = false;
   let replaying = false;
+  let boostRate = 3;
+  let settingsRevision = 0;
+
+  function validRate(value) {
+    return ALLOWED_RATES.includes(value) ? value : 3;
+  }
+
+  // Store only the user's speed preference, locally in this browser profile.
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "local" && changes.boostRate) {
+      settingsRevision++;
+      boostRate = validRate(changes.boostRate.newValue);
+    }
+  });
+  const initialRevision = settingsRevision;
+  chrome.storage.local.get({ boostRate: 3 }).then((settings) => {
+    if (settingsRevision === initialRevision) boostRate = validRate(settings.boostRate);
+  }).catch(() => { /* Continue with the default when storage is unavailable. */ });
 
   function consume(event) {
     event.preventDefault();
@@ -40,7 +58,7 @@
 
   function canUseVideo(video, player) {
     return video.isConnected && player.isConnected && player.contains(video) &&
-      !video.paused && !video.ended && video.readyState >= 1 &&
+      !video.ended && video.readyState >= 1 &&
       Number.isFinite(video.duration) && video.duration > 0 &&
       !player.matches(".ad-showing, .ad-interrupting") && isVisible(video);
   }
@@ -67,6 +85,7 @@
     return document.visibilityState === "visible" &&
       location.href === session.url && session.video.currentSrc === session.source &&
       canUseVideo(session.video, session.player) &&
+      (!session.boosted || !session.video.paused) &&
       !isControl(focused, session.player);
   }
 
@@ -77,9 +96,9 @@
       "z-index:2147483647;pointer-events:none;user-select:none;";
     const shadow = host.attachShadow({ mode: "closed" });
     const badge = document.createElement("div");
-    badge.textContent = "▶▶ 3×";
+    badge.textContent = `▶▶ ${session.boostRate}×`;
     badge.setAttribute("role", "status");
-    badge.setAttribute("aria-label", "3 倍速播放，松开右方向键恢复");
+    badge.setAttribute("aria-label", `${session.boostRate} 倍速播放，松开右方向键${session.startedPaused ? "暂停" : "恢复"}`);
     badge.style.cssText = "padding:9px 17px;border-radius:999px;background:rgba(16,18,23,.88);" +
       "color:#fff;border:1px solid rgba(255,255,255,.2);font:600 17px/1.3 system-ui,sans-serif;" +
       "box-shadow:0 4px 20px rgba(0,0,0,.22);letter-spacing:1px;";
@@ -101,6 +120,11 @@
     session.video.removeEventListener("loadstart", cancel);
     session.indicator?.remove();
     if (session.boosted) {
+      if (session.startedPaused && session.video.currentSrc === session.source &&
+          location.href === session.url) {
+        // pause() also aborts a pending play() request on a very quick release.
+        session.video.pause();
+      }
       // Restore the actual pre-hold rate (including rates other than 1×).
       session.video.playbackRate = session.originalRate;
     }
@@ -117,8 +141,19 @@
     if (!stillValid(session)) return cancel();
     session.originalRate = session.video.playbackRate;
     session.boosted = true;
-    session.video.playbackRate = BOOST_RATE;
-    showIndicator(session);
+    try {
+      session.video.playbackRate = session.boostRate;
+      if (session.startedPaused) {
+        // Called synchronously inside the trusted keydown: retain the user
+        // activation needed to start audible media from a paused state.
+        session.video.play().catch(() => {
+          if (press === session) cancel();
+        });
+      }
+      showIndicator(session);
+    } catch {
+      cancel();
+    }
   }
 
   function replayTap(session) {
@@ -163,6 +198,8 @@
       url: location.href,
       started: performance.now(),
       boosted: false,
+      startedPaused: match.video.paused,
+      boostRate,
       originalRate: match.video.playbackRate,
     };
     press = session;
@@ -177,7 +214,8 @@
     session.guard = setInterval(() => {
       if (!stillValid(session)) cancel();
     }, 100);
-    session.timer = setTimeout(() => startBoost(session), HOLD_DELAY_MS);
+    if (session.startedPaused) startBoost(session);
+    else session.timer = setTimeout(() => startBoost(session), HOLD_DELAY_MS);
   }
 
   function onKeyUp(event) {
@@ -185,7 +223,7 @@
     consume(event);
     ownsRightKey = false;
     const session = press;
-    const isTap = session && !session.boosted && !hasModifier(event) &&
+    const isTap = session && !session.startedPaused && !session.boosted && !hasModifier(event) &&
       performance.now() - session.started < HOLD_DELAY_MS && stillValid(session);
     finish();
     if (isTap) replayTap(session);

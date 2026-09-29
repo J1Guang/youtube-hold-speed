@@ -2,6 +2,8 @@
 
 开发者已确认注册并缴费。本目录保存商店素材；**上传扩展时请使用 `dist/youtube-hold-speed-v1.1.0.zip`，不要上传整个源码或素材包。**
 
+[返回项目首页](../README.md) · [查看全部图片预览与原图](README.md) · [下载已发布的安装包与素材包](https://github.com/J1Guang/youtube-hold-speed/releases/tag/v1.1.0)
+
 ## 提交记录
 
 - 提交日期：2026-09-30（Asia/Shanghai）。
@@ -19,21 +21,21 @@
 - 名称：Hold Speed for YouTube · 长按倍速（来自 Manifest）。
 - 默认语言：简体中文。
 - 已选类别：工具。
-- 详细介绍：`description.zh-CN.txt`；英文备用介绍：`description.en.txt`。
-- 图标：`assets/icon-128.png`（128×128，透明边距）。
-- 截图 1：`assets/screenshot-01-playback-1280x800.png`。
-- 截图 2：`assets/screenshot-02-settings-1280x800.png`。
-- 小宣传图：`assets/promo-small-440x280.png`。
-- 大宣传图：`assets/promo-marquee-1400x560.png`，可选。
+- 详细介绍：[中文介绍](description.zh-CN.txt)；英文备用介绍：[英文介绍](description.en.txt)。
+- 图标：[icon-128.png](assets/icon-128.png)（128×128，透明边距）。
+- 截图 1：[播放演示](assets/screenshot-01-playback-1280x800.png)（1280×800）。
+- 截图 2：[倍速设置](assets/screenshot-02-settings-1280x800.png)（1280×800）。
+- 小宣传图：[promo-small-440x280.png](assets/promo-small-440x280.png)。
+- 大宣传图：[promo-marquee-1400x560.png](assets/promo-marquee-1400x560.png)，已上传。
 - 主页：https://github.com/J1Guang/youtube-hold-speed
 - 支持：https://github.com/J1Guang/youtube-hold-speed/issues
 - 隐私政策：https://github.com/J1Guang/youtube-hold-speed/blob/main/PRIVACY.md
 
-`assets/popup-preview.png` 是实际设置弹窗预览，尺寸非商店截图规格，勿作为独立商店截图上传。
+[popup-preview.png](assets/popup-preview.png) 是实际设置弹窗预览，尺寸非商店截图规格，勿作为独立商店截图上传。
 
 ## 隐私与审核
 
-`privacy-fields.zh-CN.txt` 包含可直接填写的单一用途、storage 与网站访问理由、远程代码说明及审核测试步骤。扩展不上传或收集用户数据，只有一个本地偏好值；按实际代码和隐私政策完成后台声明。
+[隐私与权限字段](privacy-fields.zh-CN.txt) 包含可直接填写的单一用途、storage 与网站访问理由、远程代码说明及审核测试步骤。扩展不上传或收集用户数据，只有一个本地偏好值；按实际代码和隐私政策完成后台声明。
 
 应用内界面为简体中文，英文介绍已如实说明。已有的 GitHub 账号登录不能代替 Google 开发者后台登录。账户身份、安全验证、付款及开发者联系信息由账号所有者完成。
 
@@ -47,9 +49,9 @@
 
 ## 素材来源与再生成
 
-- `reference/`：用户提供的两张 YouTube 实测截图，保留画面原样。
-- `icon.svg`：原创图标的矢量源文件。
-- `assets/`：商店成品图；截图使用原始视频画面和实际设置弹窗，不伪造播放内容。
+- [reference/](reference/)：用户提供的两张 YouTube 实测截图，保留画面原样。
+- [icon.svg](icon.svg)：原创图标的矢量源文件。
+- [assets/](assets/)：商店成品图；截图使用原始视频画面和实际设置弹窗，不伪造播放内容。[查看图片预览与尺寸索引](README.md)。
 - 再生成：在已安装开发依赖和 Chromium 的环境运行 `npm run store:assets`；也可设置 `CHROME_EXECUTABLE` 使用本机 Chrome。
 - 视频画面的内容权利归其各自权利人，不纳入本项目原创代码的 MIT 授权声明。
 

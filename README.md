@@ -1,116 +1,104 @@
-# Hold Speed for YouTube
+<p align="center">
+  <img src="store/assets/icon-128.png" alt="Hold Speed 图标" width="80" height="80">
+</p>
 
-**把熟悉的「长按右方向键倍速」带到 YouTube，支持 2× / 3× / 4×。**
+<h1 align="center">Hold Speed for YouTube</h1>
 
-轻量 Chrome Manifest V3 扩展，无运行时依赖、无需构建、不联网、不收集数据。
+<p align="center">
+  把熟悉的「长按右方向键倍速」带到 YouTube。<br>
+  按住加速，松开恢复，支持 <strong>2× / 3× / 4×</strong>。
+</p>
 
-[下载扩展安装包](https://github.com/J1Guang/youtube-hold-speed/releases/latest) · [自动测试](https://github.com/J1Guang/youtube-hold-speed/actions) · [验证记录](docs/VALIDATION.md)
+<p align="center">
+  <a href="https://github.com/J1Guang/youtube-hold-speed/releases/latest">下载安装包</a> ·
+  <a href="#安装与设置">安装与设置</a> ·
+  <a href="PRIVACY.md">隐私说明</a> ·
+  <a href="store/README.md">全部展示素材</a> ·
+  <a href="https://github.com/J1Guang/youtube-hold-speed/issues">反馈问题</a>
+</p>
 
-**商店进度（2026-09-30）**：v1.1.0 已提交 Chrome 应用商店审核，当前为「待审核」，已选择审核通过后自动公开发布。扩展 ID 为 `hhooohnajochajnlmhembkjhpkkcdbmg`。审核期间可使用下方的本地安装方式；提交记录见 [商店材料说明](store/SUBMISSION.md)。
+![Hold Speed 宣传图：按住右方向键临时加速，松开恢复，支持 2×、3×、4×](store/assets/promo-marquee-1400x560.png)
 
-## 使用体验
+轻量 Chrome Manifest V3 扩展，无运行时依赖、无需构建。倍速设置仅保存在本机，无广告、无统计分析。
+
+> **商店进度 · 2026-09-30**：v1.1.0 已提交 Chrome 应用商店审核，提交后状态为「待审核」，已选择审核通过后自动公开发布。审核期间可使用下方的本地安装方式。[查看提交记录](store/SUBMISSION.md)
+
+## 功能预览
+
+### 播放中：短按快进，长按加速
+
+按住 `→` 约 300 毫秒，视频进入所选倍速，播放器显示速度提示。松开后恢复原来的速度，包括 0.5×、1.5×、2× 等；短按仍在松开时触发 YouTube 原有的快进。
+
+![YouTube 播放效果：视频顶部显示 3× 倍速提示](store/assets/screenshot-01-playback-1280x800.png)
+
+### 暂停时：按住播放，松开暂停
+
+暂停的视频按下 `→` 后立即临时播放，松开后继续暂停，停在新位置。点击工具栏扩展图标即可选择 **2× / 3× / 4×**，默认 **3×**，下次按住时生效。
+
+![倍速设置与视频演示：工具栏弹窗提供 2×、3×、4× 三档速度](store/assets/screenshot-02-settings-1280x800.png)
+
+两张展示图使用用户提供的 YouTube 实测画面；第二张同时展示 v1.1.0 的实际设置弹窗。[查看原图与素材说明](store/README.md)
+
+## 使用方式
 
 | 操作 | 效果 |
 | --- | --- |
-| 播放时长按 `→`，约 300 毫秒 | 临时以所选速度播放，默认 **3×**，显示速度提示 |
-| 松开 `→` | 恢复长按前的速度，包括 0.5×、1.5×、2× 等 |
-| 播放时短按 `→` | 松开时交还 YouTube，触发原来的快进（通常为 5 秒） |
-| 暂停时按下 `→` | 立即按所选倍速临时播放；松开恢复暂停，不跳过 5 秒 |
-| 点击工具栏的扩展图标 | 选择 **2× / 3× / 4×**，保存后下次按住生效 |
+| 播放时长按 `→` | 约 300 毫秒后临时加速，松开恢复此前速度 |
+| 播放时短按 `→` | 松开时触发 YouTube 原有快进，通常为 5 秒 |
+| 暂停时按下 `→` | 立即按所选倍速临时播放，松开恢复暂停 |
+| 点击扩展图标 | 选择 2× / 3× / 4×，仅在当前浏览器保存 |
 | `←`、`↑`、`↓` | 保留 YouTube 原有后退和音量操作 |
 | `Ctrl / Alt / Shift / ⌘` + 方向键 | 保留原有组合快捷键 |
 | 搜索框、评论框、播放器菜单中的方向键 | 保留原有编辑或导航操作 |
 
-长按从原位置继续播放，不会先跳过 5 秒。2×、3×、4× 指绝对播放速度，而不是在当前速度上再乘倍数。设置仅保存在当前浏览器，不上传或云同步。
+长按从原位置继续播放，不会先跳过 5 秒。三档速度均为绝对播放速度，不会在当前速度上再乘倍数。**暂停时的短按也采用「按下播放、松开暂停」规则**，不再跳过 5 秒。
 
-**v1.1.0 的暂停行为**：暂停时，右方向键按下即临时播放，松开回到暂停状态，短按也采用这一规则；播放中的短按仍然快进。失焦、切换标签页、视频暂停、站内切换视频、广告开始时会退出加速。广告和时长无限的直播不启用长按加速。
+## 安装与设置
 
-![倍速选择弹窗](store/assets/popup-preview.png)
+1. 在 [Releases](https://github.com/J1Guang/youtube-hold-speed/releases/latest) 下载 `youtube-hold-speed-v1.1.0.zip` 并解压。
+2. 在 Chrome 地址栏输入 `chrome://extensions`，打开右上角的**开发者模式**。
+3. 点击**加载已解压的扩展程序**，选择解压后直接包含 `manifest.json` 的目录。
+4. 刷新已打开的 YouTube 页面，在浏览器扩展菜单中固定 **Hold Speed**。
+5. 点击扩展图标选择速度，回到视频按住右方向键体验。
 
-## 安装到 Chrome
+如果克隆仓库或下载的是源码 ZIP，第 3 步应选择项目中的 **`extension` 文件夹**。安装后请保留所加载的目录；更新时点击扩展管理页面的重新加载按钮，再刷新 YouTube 标签页。可参考 [Chrome 官方本地安装说明](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)。
 
-1. 下载项目 ZIP 并解压，或克隆本仓库。
-2. 在 Chrome 地址栏输入 `chrome://extensions`。
-3. 打开右上角的**开发者模式**。
-4. 点击**加载已解压的扩展程序**，选择本项目中的 **`extension` 文件夹**（其中直接包含 `manifest.json`）。
-5. 刷新已经打开的 YouTube 页面，播放视频并使用右方向键。
+<details>
+<summary>查看实际的倍速设置弹窗</summary>
 
-如果使用的是打包后的 `youtube-hold-speed-v1.1.0.zip`，解压后直接选择含 `manifest.json` 的那层目录。安装后请保留该目录，不要删除或移动。
+<p>
+  <img src="store/assets/popup-preview.png" alt="Hold Speed 实际设置弹窗，默认选中 3×，可切换到 2× 或 4×" width="360" height="512">
+</p>
 
-更新代码后，在扩展管理页面点击重新加载，然后刷新 YouTube 标签页。以上流程依据 [Chrome 官方本地安装说明](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)。Chrome 应用商店版本已提交审核，尚未公开上架。
+选择会立即保存在本机，下一次按住右方向键时生效，无需刷新当前视频。关闭并重新打开弹窗后仍会保留设置。
 
-```sh
-git clone https://github.com/J1Guang/youtube-hold-speed.git
-```
+</details>
 
-## 实现与兼容范围
+## 兼容范围与隐私
 
-- 在 `document_start` 注册捕获阶段的键盘监听，先区分短按与长按。
-- 短按在松开时向原目标重放一次 `keydown` / `keyup`，由 YouTube 显示原生快进效果；因此快进时机从按下变为松开，这是区分长按所需的变化。
-- 长按临时修改当前 `HTMLVideoElement.playbackRate`，松开恢复先前值；不修改 `defaultPlaybackRate`。暂停起始的操作在可信按键事件内调用 `play()`，松开调用 `pause()`，并处理播放请求失败与快速松手。
-- 通过 `chrome.storage.local` 保存一个 `boostRate` 偏好；新增 `storage` 权限仅用于保存设置。每次按住开始时确定该次使用的速度。
-- 只匹配桌面版 `www.youtube.com` 和 `www.youtube-nocookie.com/embed/`，包括匹配这些地址的嵌入框架。键盘焦点需处于相应页面或播放器中。
-- 对 YouTube 的播放器结构和键盘事件处理有依赖。YouTube 若改动 `.html5-video-player`、键盘事件信任检查或快捷键实现，可能需要更新扩展；同时使用键盘或倍速类扩展也可能发生冲突。
-- 基于可见、已加载的播放器工作，兼容播放与暂停状态；不以后台视频、隐藏预览或无限时长直播为目标。
+- 适用于桌面版 Chrome 的 `www.youtube.com` 页面，以及 `www.youtube-nocookie.com/embed/` 中的匹配播放器。键盘焦点需处于相应页面或播放器中。
+- 失焦、切换标签页、切换视频或广告开始时会退出临时加速。广告和时长无限的直播不启用此功能。
+- 仅通过 `chrome.storage.local` 保存一个倍速偏好，不上传浏览、播放或按键数据。具体处理范围见 [隐私说明](PRIVACY.md)。
+- YouTube 的播放器及快捷键实现变更，或同时使用其他键盘、倍速扩展，可能影响兼容性。[遇到问题可在这里反馈](https://github.com/J1Guang/youtube-hold-speed/issues)。
 
-扩展权限和数据处理详见 [PRIVACY.md](PRIVACY.md)。本项目与 YouTube、Google、Bilibili 无官方关联。
+本项目为独立第三方扩展，与 YouTube、Google、Bilibili 无官方关联。
 
-## 开发与测试
+## 开发与资料
 
-运行要求：Node.js 22 或更新版本。普通安装用户不需要 Node.js。
-
-```sh
-npm ci
-npx playwright install chromium
-npm run check
-npm test
-npm run package
-# 可选：重新生成图标与商店素材
-npm run store:assets
-```
-
-打包产物位于 `dist/`，只包含 `extension/` 内的运行文件。依赖仅用于自动化测试和 ZIP 打包，不进入扩展。
-
-自动化测试在真正安装扩展的浏览器中使用本地生成的媒体和模拟播放器页面，覆盖长按、原速恢复、暂停恢复、播放失败、键盘重复、短按、输入框、其他快捷键、导航、失焦、广告、三档设置保存及嵌入域名。测试不访问在线 YouTube；可见性事件和播放被拒绝的场景在无头浏览器的扩展隔离环境中模拟。项目使用者已确认 v1.0.0 在线可用并提供实测截图；新增暂停行为与设置功能的自动验证记录见 [VALIDATION.md](docs/VALIDATION.md)。
-
-默认使用 Playwright 的 Chromium。如果无法下载，也可使用支持 `Extensions.loadUnpacked` 的本机新版 Chrome，在 PowerShell 中运行：
-
-```powershell
-$env:CHROME_EXECUTABLE = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
-npm test
-```
-
-测试会创建独立的临时浏览器配置，不使用日常浏览器的账号或记录。GitHub Actions 自动运行检查、测试并上传扩展 ZIP。
-
-### 在线手动验收
-
-1. 在 YouTube 普通视频中分别测试短按、连续短按、长按以及长按后的松开。
-2. 将原速度设置为 1.5× 或 2×，确认加速结束后恢复该值。
-3. 测试搜索和评论光标、播放器音量、菜单、全屏、进度条及站内切换视频。
-4. 加速时切换标签页或切出浏览器，回来后确认已恢复速度。
-5. 暂停视频，按住右方向键应立即临时播放，松开后应继续暂停。
-6. 在弹窗依次选择 2×、3×、4×，分别在播放和暂停状态测试；关闭并重新打开弹窗确认选择保留。
-
-## 项目结构
-
-```text
-extension/          可直接加载的扩展
-  manifest.json     网站范围与 Manifest V3 配置
-  content.js        键盘交互、临时倍速和恢复逻辑
-  popup.*           工具栏倍速设置界面
-  icons/            扩展图标
-tests/              浏览器集成测试与本地播放器页面
-scripts/package.mjs 生成可分发的扩展 ZIP
-.github/workflows/  自动测试与打包
-store/              商店介绍、权限说明、原始截图、图标源文件与宣传素材
-```
+- [开发、实现细节与手动验收](docs/DEVELOPMENT.md)
+- [验证记录](docs/VALIDATION.md) · [GitHub Actions](https://github.com/J1Guang/youtube-hold-speed/actions)
+- [图标、截图与宣传图素材页](store/README.md)
+- [商店提交记录与填写说明](store/SUBMISSION.md)
+- [更新日志](CHANGELOG.md)
 
 ## English
 
 Choose **2×, 3× or 4×** in the toolbar popup (default: 3×). While playing, hold **ArrowRight** for 300 ms to accelerate and release to restore the previous rate; a quick tap replays YouTube's normal seek on release. While paused, pressing ArrowRight starts temporary playback immediately and releasing pauses again. Other arrows, modified shortcuts and text input keep their native behavior. Ads and infinite-duration live streams are excluded.
 
-Load the `extension/` directory as an unpacked extension at `chrome://extensions`, then refresh YouTube. No build or extra account is required. Only the speed preference is stored locally. Browser tests use local media and a simulated player; the project user confirmed the original version working on live YouTube.
+Download the extension ZIP from [Releases](https://github.com/J1Guang/youtube-hold-speed/releases/latest), extract it, then load the folder containing `manifest.json` at `chrome://extensions` with Developer mode enabled. When using the source repository, load the `extension/` directory instead. Refresh YouTube after installation. The popup is currently in Simplified Chinese. Only the speed preference is stored locally; no extra account is required.
+
+See the [visual asset gallery](store/README.md), [development guide](docs/DEVELOPMENT.md) and [validation record](docs/VALIDATION.md) for more details.
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). 视频截图内容的权利归其各自权利人；素材来源见 [素材说明](store/README.md#来源与再生成)。

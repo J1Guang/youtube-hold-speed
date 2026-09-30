@@ -8,6 +8,8 @@
 - `npm run check`：通过。
 - `npm test -- --grep 'popup|saved speed'`：8 项通过，覆盖三档速度在播放/暂停时生效、设置保存及键盘操作。
 - `npm run package`：通过，生成 v1.1.1 安装包。
+- [GitHub Actions](https://github.com/Vaelitte/youtube-hold-speed/actions/runs/36769099556)：发布提交 `4324ca3` 的语法检查、完整测试及打包均通过。
+- 已逐一核对安装包内文件与源码一致；GitHub Release 附件的 SHA-256 与上传商店的安装包一致。
 - 已在商店后台确认 v1.1.0 为「已发布 - 公开发布」；补丁版本的商店状态见[提交记录](../store/SUBMISSION.md)。
 
 ## v1.1.0 — 2026-09-30

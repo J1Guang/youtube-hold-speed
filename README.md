@@ -22,7 +22,7 @@
 
 轻量 Chrome Manifest V3 扩展，无运行时依赖、无需构建。倍速设置仅保存在本机，无广告、无统计分析。
 
-> **商店进度 · 2026-10-01 核实**：v1.1.0 已通过审核并公开发布，可以[从 Chrome 应用商店安装](https://chromewebstore.google.com/detail/hhooohnajochajnlmhembkjhpkkcdbmg)。GitHub 的 v1.1.1 修正了账号更名后的链接；商店更新进度见[提交记录](store/SUBMISSION.md)。
+> **商店进度 · 2026-10-01 核实**：v1.1.0 已通过审核并公开发布，可以[从 Chrome 应用商店安装](https://chromewebstore.google.com/detail/hhooohnajochajnlmhembkjhpkkcdbmg)。v1.1.1 修正了账号更名后的链接，已在 GitHub 发布并提交商店审核，通过后自动发布；详见[提交记录](store/SUBMISSION.md)。
 
 ## 功能预览
 

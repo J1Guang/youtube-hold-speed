@@ -8,7 +8,8 @@
 
 - 已确认 v1.1.0 在商店公开发布：[商店页面](https://chromewebstore.google.com/detail/hhooohnajochajnlmhembkjhpkkcdbmg)。
 - v1.1.1 更新扩展内置及商店资料中的 GitHub 链接，改用 Vaelitte；开发者主体、功能、权限和数据处理方式不变。
-- v1.1.1 安装包与提交文案已准备，商店更新尚待提交。
+- v1.1.1 已于 2026-10-01（Asia/Shanghai）提交审核；后台确认「已将您的扩展程序提交送审」，草稿状态为「待审核」。
+- 已保存新账号下的商品说明、主页、支持和隐私政策链接；审核通过后自动发布。提交后确认 v1.1.0 仍公开可用。
 - 继续使用同一扩展 ID `hhooohnajochajnlmhembkjhpkkcdbmg`。
 - v1.1.1 安装包 SHA-256：`D01AE7A5ED84CE2BAB4BDBA16D637A05FD699212706964839C6A9BEA5D4DFB9C`。
 

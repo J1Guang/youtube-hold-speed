@@ -1,8 +1,8 @@
 # Hold Speed 展示素材
 
-[返回项目首页](../README.md) · [商店提交记录](SUBMISSION.md) · [下载素材包](https://github.com/J1Guang/youtube-hold-speed/releases/tag/v1.1.0)
+[返回项目首页](../README.md) · [商店提交记录](SUBMISSION.md) · [下载素材包](https://github.com/Vaelitte/youtube-hold-speed/releases/tag/v1.1.1)
 
-这里集中展示项目首页与 Chrome 应用商店使用的六张成品图。点击预览可打开原尺寸文件；在文件页选择下载即可保存 PNG。Releases 中的 `youtube-hold-speed-store-kit-v1.1.0.zip` 包含整套提交素材。
+这里集中展示项目首页与 Chrome 应用商店使用的六张成品图。点击预览可打开原尺寸文件；在文件页选择下载即可保存 PNG。Releases 中的 `youtube-hold-speed-store-kit-v1.1.1.zip` 包含整套图片及更名后的提交文案。图片沿用 v1.1.0，界面与播放功能未改变。
 
 ## 首页封面与顶部宣传图
 

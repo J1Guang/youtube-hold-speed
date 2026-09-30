@@ -23,5 +23,5 @@ Hold Speed for YouTube · 长按倍速
 
 本扩展为独立第三方项目，与 YouTube、Google、Bilibili 无官方关联。
 
-项目与反馈：https://github.com/J1Guang/youtube-hold-speed
-隐私政策：https://github.com/J1Guang/youtube-hold-speed/blob/main/PRIVACY.md
+项目与反馈：https://github.com/Vaelitte/youtube-hold-speed
+隐私政策：https://github.com/Vaelitte/youtube-hold-speed/blob/main/PRIVACY.md

@@ -14,13 +14,13 @@ YouTube 网站访问权限理由
 本扩展不收集或上传商店所列类别的用户数据，不向开发者或第三方传输数据。仅在本机临时处理控制播放所需的事件和播放器状态，并本地保存一个倍速设置。隐私表单应与下方政策以及代码的实际行为保持一致。
 
 隐私政策 URL
-https://github.com/J1Guang/youtube-hold-speed/blob/main/PRIVACY.md
+https://github.com/Vaelitte/youtube-hold-speed/blob/main/PRIVACY.md
 
 支持 URL
-https://github.com/J1Guang/youtube-hold-speed/issues
+https://github.com/Vaelitte/youtube-hold-speed/issues
 
 主页 URL
-https://github.com/J1Guang/youtube-hold-speed
+https://github.com/Vaelitte/youtube-hold-speed
 
 审核测试说明
 打开一个已加载的普通 YouTube 视频。播放中短按右方向键应在松开时快进，长按约 300 毫秒应进入默认 3×，松开恢复原速度。暂停后按下右方向键应立即临时播放，松开应恢复暂停且不跳过 5 秒。打开扩展工具栏弹窗，分别选择 2× 和 4×，返回视频后再次按住验证。搜索与评论输入、其他方向键应保留原行为。不需要测试账号或特殊付费内容。广告和无限时长直播不启用该功能。

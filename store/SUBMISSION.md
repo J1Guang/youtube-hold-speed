@@ -1,10 +1,18 @@
-# Chrome Web Store 提交材料 — v1.1.0
+# Chrome Web Store 提交材料 — v1.1.1
 
-开发者已确认注册并缴费。本目录保存商店素材；**上传扩展时请使用 `dist/youtube-hold-speed-v1.1.0.zip`，不要上传整个源码或素材包。**
+开发者已确认注册并缴费。本目录保存商店素材；**上传扩展时请使用 `dist/youtube-hold-speed-v1.1.1.zip`，不要上传整个源码或素材包。**
 
-[返回项目首页](../README.md) · [查看全部图片预览与原图](README.md) · [下载已发布的安装包与素材包](https://github.com/J1Guang/youtube-hold-speed/releases/tag/v1.1.0)
+[返回项目首页](../README.md) · [查看全部图片预览与原图](README.md) · [下载已发布的安装包与素材包](https://github.com/Vaelitte/youtube-hold-speed/releases/tag/v1.1.1)
 
-## 提交记录
+## 当前更新 — 2026-10-01
+
+- 已确认 v1.1.0 在商店公开发布：[商店页面](https://chromewebstore.google.com/detail/hhooohnajochajnlmhembkjhpkkcdbmg)。
+- v1.1.1 更新扩展内置及商店资料中的 GitHub 链接，改用 Vaelitte；开发者主体、功能、权限和数据处理方式不变。
+- v1.1.1 安装包与提交文案已准备，商店更新尚待提交。
+- 继续使用同一扩展 ID `hhooohnajochajnlmhembkjhpkkcdbmg`。
+- v1.1.1 安装包 SHA-256：`D01AE7A5ED84CE2BAB4BDBA16D637A05FD699212706964839C6A9BEA5D4DFB9C`。
+
+## v1.1.0 提交记录
 
 - 提交日期：2026-09-30（Asia/Shanghai）。
 - 扩展 ID：`hhooohnajochajnlmhembkjhpkkcdbmg`。
@@ -14,7 +22,7 @@
 - 两步验证及公开联系邮箱验证已完成。
 - 上传包 SHA-256：`C0C54EFF04455C45DB91FC6A8B5F1B69F79486E75165D6BD18AC53744E9A2A1B`。
 
-此记录确认的是成功提交审核，不代表已经通过审核或已经公开上架。后续可在开发者信息中心按扩展 ID 查询状态。
+以上是 2026-09-30 的提交记录。2026-10-01 已在开发者后台确认该版本通过审核并公开发布。
 
 ## 商店字段
 
@@ -27,9 +35,9 @@
 - 截图 2：[倍速设置](assets/screenshot-02-settings-1280x800.png)（1280×800）。
 - 小宣传图：[promo-small-440x280.png](assets/promo-small-440x280.png)。
 - 大宣传图：[promo-marquee-1400x560.png](assets/promo-marquee-1400x560.png)，已上传。
-- 主页：https://github.com/J1Guang/youtube-hold-speed
-- 支持：https://github.com/J1Guang/youtube-hold-speed/issues
-- 隐私政策：https://github.com/J1Guang/youtube-hold-speed/blob/main/PRIVACY.md
+- 主页：https://github.com/Vaelitte/youtube-hold-speed
+- 支持：https://github.com/Vaelitte/youtube-hold-speed/issues
+- 隐私政策：https://github.com/Vaelitte/youtube-hold-speed/blob/main/PRIVACY.md
 
 [popup-preview.png](assets/popup-preview.png) 是实际设置弹窗预览，尺寸非商店截图规格，勿作为独立商店截图上传。
 
@@ -41,7 +49,7 @@
 
 ## 提交顺序
 
-1. 上传扩展 ZIP；检查版本显示为 1.1.0。
+1. 上传扩展 ZIP；检查版本显示为 1.1.1。
 2. 填写商店介绍、类别和语言，上传图标、两张截图与小宣传图。
 3. 填写隐私说明和权限理由，提供公开隐私政策链接。
 4. 使用注册账号已有的开发者联系信息，并完成后台要求的账号验证。

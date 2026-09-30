@@ -10,18 +10,19 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/J1Guang/youtube-hold-speed/releases/latest">下载安装包</a> ·
+  <a href="https://chromewebstore.google.com/detail/hhooohnajochajnlmhembkjhpkkcdbmg">从 Chrome 商店安装</a> ·
+  <a href="https://github.com/Vaelitte/youtube-hold-speed/releases/latest">下载安装包</a> ·
   <a href="#安装与设置">安装与设置</a> ·
   <a href="PRIVACY.md">隐私说明</a> ·
   <a href="store/README.md">全部展示素材</a> ·
-  <a href="https://github.com/J1Guang/youtube-hold-speed/issues">反馈问题</a>
+  <a href="https://github.com/Vaelitte/youtube-hold-speed/issues">反馈问题</a>
 </p>
 
 ![Hold Speed 宣传图：按住右方向键临时加速，松开恢复，支持 2×、3×、4×](store/assets/promo-marquee-1400x560.png)
 
 轻量 Chrome Manifest V3 扩展，无运行时依赖、无需构建。倍速设置仅保存在本机，无广告、无统计分析。
 
-> **商店进度 · 2026-09-30**：v1.1.0 已提交 Chrome 应用商店审核，提交后状态为「待审核」，已选择审核通过后自动公开发布。审核期间可使用下方的本地安装方式。[查看提交记录](store/SUBMISSION.md)
+> **商店进度 · 2026-10-01 核实**：v1.1.0 已通过审核并公开发布，可以[从 Chrome 应用商店安装](https://chromewebstore.google.com/detail/hhooohnajochajnlmhembkjhpkkcdbmg)。GitHub 的 v1.1.1 修正了账号更名后的链接；商店更新进度见[提交记录](store/SUBMISSION.md)。
 
 ## 功能预览
 
@@ -55,7 +56,9 @@
 
 ## 安装与设置
 
-1. 在 [Releases](https://github.com/J1Guang/youtube-hold-speed/releases/latest) 下载 `youtube-hold-speed-v1.1.0.zip` 并解压。
+可直接[从 Chrome 应用商店安装](https://chromewebstore.google.com/detail/hhooohnajochajnlmhembkjhpkkcdbmg)。如需使用 GitHub 安装包或源码，可按以下步骤手动加载：
+
+1. 在 [Releases](https://github.com/Vaelitte/youtube-hold-speed/releases/latest) 下载 `youtube-hold-speed-v1.1.1.zip` 并解压。
 2. 在 Chrome 地址栏输入 `chrome://extensions`，打开右上角的**开发者模式**。
 3. 点击**加载已解压的扩展程序**，选择解压后直接包含 `manifest.json` 的目录。
 4. 刷新已打开的 YouTube 页面，在浏览器扩展菜单中固定 **Hold Speed**。
@@ -79,14 +82,14 @@
 - 适用于桌面版 Chrome 的 `www.youtube.com` 页面，以及 `www.youtube-nocookie.com/embed/` 中的匹配播放器。键盘焦点需处于相应页面或播放器中。
 - 失焦、切换标签页、切换视频或广告开始时会退出临时加速。广告和时长无限的直播不启用此功能。
 - 仅通过 `chrome.storage.local` 保存一个倍速偏好，不上传浏览、播放或按键数据。具体处理范围见 [隐私说明](PRIVACY.md)。
-- YouTube 的播放器及快捷键实现变更，或同时使用其他键盘、倍速扩展，可能影响兼容性。[遇到问题可在这里反馈](https://github.com/J1Guang/youtube-hold-speed/issues)。
+- YouTube 的播放器及快捷键实现变更，或同时使用其他键盘、倍速扩展，可能影响兼容性。[遇到问题可在这里反馈](https://github.com/Vaelitte/youtube-hold-speed/issues)。
 
 本项目为独立第三方扩展，与 YouTube、Google、Bilibili 无官方关联。
 
 ## 开发与资料
 
 - [开发、实现细节与手动验收](docs/DEVELOPMENT.md)
-- [验证记录](docs/VALIDATION.md) · [GitHub Actions](https://github.com/J1Guang/youtube-hold-speed/actions)
+- [验证记录](docs/VALIDATION.md) · [GitHub Actions](https://github.com/Vaelitte/youtube-hold-speed/actions)
 - [图标、截图与宣传图素材页](store/README.md)
 - [商店提交记录与填写说明](store/SUBMISSION.md)
 - [更新日志](CHANGELOG.md)
@@ -95,7 +98,7 @@
 
 Choose **2×, 3× or 4×** in the toolbar popup (default: 3×). While playing, hold **ArrowRight** for 300 ms to accelerate and release to restore the previous rate; a quick tap replays YouTube's normal seek on release. While paused, pressing ArrowRight starts temporary playback immediately and releasing pauses again. Other arrows, modified shortcuts and text input keep their native behavior. Ads and infinite-duration live streams are excluded.
 
-Download the extension ZIP from [Releases](https://github.com/J1Guang/youtube-hold-speed/releases/latest), extract it, then load the folder containing `manifest.json` at `chrome://extensions` with Developer mode enabled. When using the source repository, load the `extension/` directory instead. Refresh YouTube after installation. The popup is currently in Simplified Chinese. Only the speed preference is stored locally; no extra account is required.
+Install from the [Chrome Web Store](https://chromewebstore.google.com/detail/hhooohnajochajnlmhembkjhpkkcdbmg), or download the extension ZIP from [Releases](https://github.com/Vaelitte/youtube-hold-speed/releases/latest), extract it, then load the folder containing `manifest.json` at `chrome://extensions` with Developer mode enabled. When using the source repository, load the `extension/` directory instead. Refresh YouTube after installation. The popup is currently in Simplified Chinese. Only the speed preference is stored locally; no extra account is required.
 
 See the [visual asset gallery](store/README.md), [development guide](docs/DEVELOPMENT.md) and [validation record](docs/VALIDATION.md) for more details.
 

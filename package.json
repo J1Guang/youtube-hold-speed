@@ -1,13 +1,13 @@
 {
   "name": "youtube-hold-speed",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "description": "Hold ArrowRight for configurable 2x, 3x or 4x playback on YouTube, even while paused.",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/J1Guang/youtube-hold-speed.git"
+    "url": "git+https://github.com/Vaelitte/youtube-hold-speed.git"
   },
   "engines": {
     "node": ">=22"

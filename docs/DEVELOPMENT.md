@@ -7,7 +7,7 @@
 运行要求：Node.js 22 或更新版本。普通安装用户不需要 Node.js。
 
 ```sh
-git clone https://github.com/J1Guang/youtube-hold-speed.git
+git clone https://github.com/Vaelitte/youtube-hold-speed.git
 cd youtube-hold-speed
 npm ci
 npx playwright install chromium

@@ -4,7 +4,9 @@
 
 适用版本 / Applies to：1.1.0 及后续沿用本政策的版本
 
-开发者 / Developer：J1Guang
+开发者 / Developer：Vaelitte
+
+信息更新 / Information updated：2026-10-01。仅更新 GitHub 用户名与联系链接，数据处理方式不变。GitHub username and contact links updated; data practices are unchanged.
 
 ## 中文
 
@@ -38,7 +40,7 @@
 
 ### 联系与变更
 
-隐私问题可通过 [GitHub Issues](https://github.com/J1Guang/youtube-hold-speed/issues) 联系开发者。公开问题中请勿填写密码或其他敏感信息。政策有实质变更时，会更新本页面的生效日期，并按商店要求披露数据处理变化。
+隐私问题可通过 [GitHub Issues](https://github.com/Vaelitte/youtube-hold-speed/issues) 联系开发者。公开问题中请勿填写密码或其他敏感信息。政策有实质变更时，会更新本页面的生效日期，并按商店要求披露数据处理变化。
 
 本扩展是独立第三方项目，与 YouTube、Google 或 Bilibili 无官方关联。
 
@@ -72,6 +74,6 @@ Use of user data follows the Chrome Web Store User Data Policy, including its Li
 
 You can change the speed in the popup, manage site access, disable the extension or uninstall it using Chrome's extension settings. Uninstalling removes the stored local preference.
 
-For privacy questions, contact J1Guang through [GitHub Issues](https://github.com/J1Guang/youtube-hold-speed/issues). Do not post passwords or sensitive information in public issues. Material changes to this policy will be reflected in the effective date and disclosed as required by store policies.
+For privacy questions, contact Vaelitte through [GitHub Issues](https://github.com/Vaelitte/youtube-hold-speed/issues). Do not post passwords or sensitive information in public issues. Material changes to this policy will be reflected in the effective date and disclosed as required by store policies.
 
 This is an independent project, not affiliated with YouTube, Google or Bilibili.

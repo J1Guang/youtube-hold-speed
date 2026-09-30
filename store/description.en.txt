@@ -23,5 +23,5 @@ Refresh existing YouTube tabs after installing or updating. Pin the extension to
 
 Independent third-party extension, not affiliated with YouTube, Google or Bilibili.
 
-Project and support: https://github.com/J1Guang/youtube-hold-speed
-Privacy policy: https://github.com/J1Guang/youtube-hold-speed/blob/main/PRIVACY.md
+Project and support: https://github.com/Vaelitte/youtube-hold-speed
+Privacy policy: https://github.com/Vaelitte/youtube-hold-speed/blob/main/PRIVACY.md
